@@ -19,11 +19,11 @@ public class RaidEngine {
         Objects.requireNonNull(teamB, "teamB must not be null");
         Objects.requireNonNull(teamASkill, "teamASkill must not be null");
         Objects.requireNonNull(teamBSkill, "teamBSkill must not be null");
-
         RaidResult result = new RaidResult();
-        result.setRounds(0);
-        result.setWinner("TBD");
-        result.addLine("TODO: implement raid simulation");
-        return result;
+        result.addLine("=== Raid Start ===");
+        result.addLine("Team A: " + teamA.getName() + " (HP=" + teamA.getHealth() + ")");
+        result.addLine("Team B: " + teamB.getName() + " (HP=" + teamB.getHealth() + ")");
+        result.addLine("Team A skill: " + summarize(teamASkill));
+        result.addLine("Team B skill: " + summarize(teamBSkill));
     }
 }
