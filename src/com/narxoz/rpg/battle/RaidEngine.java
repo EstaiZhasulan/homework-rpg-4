@@ -25,5 +25,29 @@ public class RaidEngine {
         result.addLine("Team B: " + teamB.getName() + " (HP=" + teamB.getHealth() + ")");
         result.addLine("Team A skill: " + summarize(teamASkill));
         result.addLine("Team B skill: " + summarize(teamBSkill));
+
+        if (!teamA.isAlive() && !teamB.isAlive()) {
+            result.setWinner("Draw");
+            result.setRounds(0);
+            result.addLine("Both teams are already defeated.");
+            result.addLine("=== Raid End ===");
+            return result;
+        }
+
+        if (!teamA.isAlive()) {
+            result.setWinner(teamB.getName());
+            result.setRounds(0);
+            result.addLine("Team A is already defeated.");
+            result.addLine("=== Raid End ===");
+            return result;
+        }
+
+        if (!teamB.isAlive()) {
+            result.setWinner(teamA.getName());
+            result.setRounds(0);
+            result.addLine("Team B is already defeated.");
+            result.addLine("=== Raid End ===");
+            return result;
+        }
     }
 }
