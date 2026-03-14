@@ -38,9 +38,13 @@ public class PartyComposite implements CombatNode {
 
     @Override
     public int getAttackPower() {
-        // TODO: Composite aggregation
-        // Return total attack of alive children only.
-        return 0;
+        int total = 0;
+        for (CombatNode child : children) {
+            if (child.isAlive()) {
+                total += child.getAttackPower();
+            }
+        }
+        return total;
     }
 
     @Override
