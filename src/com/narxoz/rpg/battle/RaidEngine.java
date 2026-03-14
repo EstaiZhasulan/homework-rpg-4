@@ -49,5 +49,30 @@ public class RaidEngine {
             result.addLine("=== Raid End ===");
             return result;
         }
+        int rounds = 0;
+        final int maxRoundsSafety = 10_000;
+
+        while (teamA.isAlive() && teamB.isAlive() && rounds < maxRoundsSafety) {
+
+            rounds++;
+
+            result.addLine("");
+            result.addLine("--- Round " + rounds + " ---");
+
+            // Team A attack
+            if (teamA.isAlive()) {
+                castWithOptionalCrit("Team A", teamA, teamB, teamASkill, result);
+            }
+
+            if (!teamB.isAlive()) {
+                break;
+            }
+
+            // Team B attack
+            if (teamB.isAlive()) {
+                castWithOptionalCrit("Team B", teamB, teamA, teamBSkill, result);
+            }
+        }
+
     }
 }
