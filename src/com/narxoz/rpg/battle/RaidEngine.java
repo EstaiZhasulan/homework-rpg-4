@@ -107,5 +107,23 @@ public class RaidEngine {
         int hpAfter = target.getHealth();
 
         result.addLine("  -> Target HP: " + hpBefore + " -> " + hpAfter);
+        boolean crit = random.nextInt(100) < 10;
+
+        if (crit && target.isAlive()) {
+
+            result.addLine("  **CRIT!** Extra cast triggered.");
+
+            int hpBeforeCrit = target.getHealth();
+
+            skill.cast(target);
+
+            int hpAfterCrit = target.getHealth();
+
+            result.addLine("  -> Target HP (crit): " + hpBeforeCrit + " -> " + hpAfterCrit);
+       }
+    }
+    private static String summarize(Skill skill) {
+        return skill.getSkillName() + " [" + skill.getEffectName() + "]";
     }
 }
+
