@@ -69,8 +69,11 @@ public class PartyComposite implements CombatNode {
 
     @Override
     public boolean isAlive() {
-        // TODO: Composite liveness
-        // Return true when at least one child is alive.
+        for (CombatNode child : children) {
+            if (child.isAlive()) {
+                return true;
+            }
+        }
         return false;
     }
 
