@@ -73,6 +73,28 @@ public class RaidEngine {
                 castWithOptionalCrit("Team B", teamB, teamA, teamBSkill, result);
             }
         }
+        result.setRounds(rounds);
 
+        String winner;
+
+        if (!teamA.isAlive() && !teamB.isAlive()) {
+            winner = "Draw";
+        } else if (!teamB.isAlive()) {
+            winner = teamA.getName();
+        } else if (!teamA.isAlive()) {
+            winner = teamB.getName();
+        } else {
+            winner = "Draw (max rounds reached)";
+            result.addLine("Safety stop: max rounds reached (" + maxRoundsSafety + ").");
+        }
+
+        result.setWinner(winner);
+
+        result.addLine("");
+        result.addLine("=== Raid End ===");
+        result.addLine("Winner: " + winner);
+
+        return result;
+    }
     }
 }
