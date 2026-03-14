@@ -92,7 +92,12 @@ public class PartyComposite implements CombatNode {
     }
 
     private List<CombatNode> getAliveChildren() {
-        // TODO: helper for takeDamage()
-        return new ArrayList<>();
+        List<CombatNode> alive = new ArrayList<>();
+        for (CombatNode child : children) {
+            if (child.isAlive()) {
+                alive.add(child);
+            }
+        }
+        return alive;
     }
 }
