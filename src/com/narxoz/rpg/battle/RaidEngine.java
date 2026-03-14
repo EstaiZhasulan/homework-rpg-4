@@ -96,5 +96,16 @@ public class RaidEngine {
 
         return result;
     }
+    private void castWithOptionalCrit(String label, CombatNode caster, CombatNode target, Skill skill, RaidResult result) {
+
+        int hpBefore = target.getHealth();
+
+        result.addLine(label + " casts " + summarize(skill) + " on " + target.getName() + " (HP " + hpBefore + ")");
+
+        skill.cast(target);
+
+        int hpAfter = target.getHealth();
+
+        result.addLine("  -> Target HP: " + hpBefore + " -> " + hpAfter);
     }
 }
