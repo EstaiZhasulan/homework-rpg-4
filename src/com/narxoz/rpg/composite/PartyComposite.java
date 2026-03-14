@@ -29,9 +29,11 @@ public class PartyComposite implements CombatNode {
 
     @Override
     public int getHealth() {
-        // TODO: Composite aggregation
-        // Return total health of all children (and nested children).
-        return 0;
+        int total = 0;
+        for (CombatNode child : children) {
+            total += child.getHealth();
+        }
+        return total;
     }
 
     @Override
