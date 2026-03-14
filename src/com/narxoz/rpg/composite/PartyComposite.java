@@ -3,16 +3,18 @@ package com.narxoz.rpg.composite;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class PartyComposite implements CombatNode {
     private final String name;
     private final List<CombatNode> children = new ArrayList<>();
 
     public PartyComposite(String name) {
-        this.name = name;
+        this.name = Objects.requireNonNull(name, "name must not be null");
     }
 
     public void add(CombatNode node) {
+        Objects.requireNonNull(node, "node must not be null");
         children.add(node);
     }
 
