@@ -2,6 +2,8 @@ package com.narxoz.rpg.bridge;
 
 import com.narxoz.rpg.composite.CombatNode;
 
+import java.util.List;
+
 public class SingleTargetSkill extends Skill {
     public SingleTargetSkill(String skillName, int basePower, EffectImplementor effect) {
         super(skillName, basePower, effect);
@@ -9,8 +11,17 @@ public class SingleTargetSkill extends Skill {
 
     @Override
     public void cast(CombatNode target) {
-        // TODO: Single-target Bridge action
-        // 1) Resolve final damage through effect implementor
-        // 2) Apply to target node
+        if (target == null || !target.isAlive()) {
+            return;
+        }
+
+        int dmg = resolvedDamage();
+        if (dmg <= 0) {
+            return;
+        }
+        CombatNode leaf = findFirstAliveLeaf(target);
+        if (leaf != null) {
+            leaf.takeDamage(dmg);
+        }
     }
 }
