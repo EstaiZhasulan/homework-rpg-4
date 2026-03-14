@@ -24,4 +24,23 @@ public class SingleTargetSkill extends Skill {
             leaf.takeDamage(dmg);
         }
     }
+
+    private static CombatNode findFirstAliveLeaf(CombatNode node) {
+        if (node == null || !node.isAlive()) {
+            return null;
+        }
+
+        List<CombatNode> children = node.getChildren();
+        if (children == null || children.isEmpty()) {
+            return node;
+        }
+
+        for (CombatNode child : children) {
+            CombatNode found = findFirstAliveLeaf(child);
+            if (found != null) {
+                return found;
+            }
+        }
+        return null;
+    }
 }
